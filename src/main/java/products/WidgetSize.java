@@ -5,7 +5,7 @@ import menus.HasDescription;
 public enum WidgetSize implements HasDescription {
 	SMALL("Small"),
 	MEDIUM("Medium"),
-	LARGE("LARGE");
+	LARGE("Large");
 	
 	private final String description;
 	
