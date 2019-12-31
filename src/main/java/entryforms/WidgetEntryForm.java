@@ -1,20 +1,24 @@
 package entryforms;
 
 import io.Prompter;
+import main.Inventory;
 import menus.Menu;
 import products.Color;
 import products.Widget;
 import products.WidgetSize;
+import validators.NewProductIdValidator;
 
 public class WidgetEntryForm {
 	private final Prompter prompter;
+	private final NewProductIdValidator newProductIdValidator;
 
-	public WidgetEntryForm(Prompter prompter) {
+	public WidgetEntryForm(Prompter prompter, Inventory inventory) {
 		this.prompter = prompter;
+		this.newProductIdValidator = new NewProductIdValidator(inventory);
 	}
 
 	public Widget promptForWidgetData() {
-		long id = prompter.promptForInt("Enter ID: ", 0, 1000);
+		long id = prompter.promptForLong("Enter ID: ", newProductIdValidator);
 		String description = prompter.prompt("Enter description: ");
 		Color color = selectColor();
 		WidgetSize size = selectSize();

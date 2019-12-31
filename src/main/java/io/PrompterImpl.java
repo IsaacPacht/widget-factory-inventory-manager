@@ -1,6 +1,6 @@
 package io;
 
-import validators.IntegerValidator;
+import validators.LongValidator;
 import validators.Validator;
 
 public class PrompterImpl implements Prompter {
@@ -24,10 +24,14 @@ public class PrompterImpl implements Prompter {
 	}
 
 	public int promptForInt(String message, int minimum, int maximum) {
-		String str = prompt(message, new IntegerValidator(minimum, maximum));
+		String str = prompt(message, new LongValidator(minimum, maximum));
 		return Integer.parseInt(str);
 	}
 
+	public long promptForLong(String message, long minimum, long maximum) {
+		return promptForLong(message, new LongValidator(minimum, maximum));
+	}
+	
 	@Override
 	public String prompt(String message, Validator validator) {
 		while (true) {
@@ -39,5 +43,11 @@ public class PrompterImpl implements Prompter {
 			
 			println(errorMessage);
 		}
+	}
+
+	@Override
+	public long promptForLong(String message, Validator validator) {
+		String value = prompt(message, validator);
+		return Long.parseLong(value); 
 	}
 }
